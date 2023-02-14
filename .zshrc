@@ -22,6 +22,3 @@ setopt PROMPT_SUBST
 PROMPT='
 %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%f:%{$(pwd|([[ $EUID == 0 ]] && GREP_COLORS="mt=01;31" grep --color=always /|| GREP_COLORS="mt=01;34" grep --color=always /))%${#PWD}G%}%F{red}$(parse_git_branch)%f
 >'
-
-# Python
-alias ss="python -m SimpleHTTPServer"
