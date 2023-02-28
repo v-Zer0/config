@@ -1,7 +1,3 @@
-# Bind zsh to emacs shortcuts
-bindkey -e
-bindkey "\e[3~" delete-char
-
 # Git Shortcuts
 alias gs="git status"
 alias gd="git diff"
