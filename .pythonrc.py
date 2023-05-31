@@ -1,4 +1,4 @@
-import functools, hashlib, json, re, requests, os
+import csv, functools, hashlib, json, re, requests, os
 from collections import Counter, defaultdict
 from datetime import datetime
 from tabulate import tabulate
@@ -22,9 +22,17 @@ def req(method, url, headers={}, json={}, token=None):
   return r
 
 
-def write(file_name, obj):
+def write_to_json(file_name, obj):
   with open(file_name, "w") as outfile:
     outfile.write(json.dumps(obj, default=str, indent=2))
+
+
+def write_to_csv(file_name, field_names, objects):
+  with open(file_name, 'w', newline='') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=field_names)
+    writer.writeheader()
+    for o in objects:
+      writer.writerow({k:o[k] for k in field_names})
 
 
 # recursive attribute getter: obj.nested.attribute
