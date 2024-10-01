@@ -1,4 +1,4 @@
-import csv, functools, hashlib, json, re, requests, os
+import csv, functools, hashlib, inspect, json, re, requests, os
 from collections import Counter, defaultdict
 from datetime import datetime
 from tabulate import tabulate
@@ -33,6 +33,17 @@ def write_to_csv(file_name, field_names, objects):
     writer.writeheader()
     for o in objects:
       writer.writerow({k:o[k] for k in field_names})
+
+
+def csv_to_dict(file_path):
+  reader = csv.DictReader(open(file_path, 'r'))
+  return [d for d in reader]
+
+
+def json_file_to_dict(file_path):
+  with open(file_path, 'r') as f:
+    data = json.load(f)
+  return data
 
 
 # recursive attribute getter: obj.nested.attribute
@@ -78,6 +89,9 @@ def gb_attrs(objs, attrs):
 def pp(obj):
   print(json.dumps(obj, indent=2, default=str))
 
+
+def pp_func(function_name):
+  print(inspect.getsource(function_name))
 
 def pp_tab(objs, group_by=[], keys=[]):
   if not keys:
